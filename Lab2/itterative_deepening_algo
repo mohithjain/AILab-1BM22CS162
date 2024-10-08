@@ -1,0 +1,68 @@
+class Graph:
+    def __init__(self):
+        self.graph = {}
+
+    def add_edge(self, u, v):
+        """Add an edge from node u to node v."""
+        if u not in self.graph:
+            self.graph[u] = []
+        self.graph[u].append(v)
+
+    def DLS(self, src, target, limit):
+        """
+        Depth-Limited Search (DLS): Search for the target starting from the src node,
+        but stop the recursion once the depth limit is reached.
+        """
+        if src == target:
+            return True  
+
+        if limit <= 0:
+            return False  
+
+        
+        if src in self.graph:
+            for neighbor in self.graph[src]:
+                if self.DLS(neighbor, target, limit - 1):
+                    return True
+
+        return False  
+
+    def IDDFS(self, src, target, max_depth):
+        """
+        Iterative Deepening Depth-First Search (IDDFS):
+        Perform DLS for increasing limits (from 0 to max_depth).
+        """
+        for depth in range(max_depth + 1):
+            print(f"Checking with depth limit: {depth}")
+            if self.DLS(src, target, depth):
+                print(f"Target {target} found at depth level: {depth}")
+                return True  # Target found within depth limit
+        return False  # Target not reachable within max_depth
+
+
+
+def main():
+
+    g = Graph()
+
+
+    num_edges = int(input("Enter the number of edges in the graph: "))
+    print("Enter each edge as a pair of space-separated integers (source, destination):")
+    for _ in range(num_edges):
+        u, v = map(int, input().split())  
+        g.add_edge(u, v)
+
+
+    src = int(input("Enter the source node: "))
+    target = int(input("Enter the target node: "))
+    max_depth = int(input("Enter the maximum depth limit: "))
+
+ 
+    if g.IDDFS(src, target, max_depth):
+        print(f"\nTarget {target} is reachable from source {src} within depth {max_depth}")
+    else:
+        print(f"\nTarget {target} is NOT reachable from source {src} within depth {max_depth}")
+
+
+if __name__ == "__main__":
+    main()

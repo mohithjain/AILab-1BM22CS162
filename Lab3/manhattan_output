@@ -1,0 +1,49 @@
+Enter the start state (row by row, use 0 for the blank):
+2 8 3
+1 6 4
+0 7 5
+Enter the goal state (row by row, use 0 for the blank):
+1 2 3
+8 0 4
+7 6 5
+
+Start State:
+[2, 8, 3]
+[1, 6, 4]
+[0, 7, 5]
+
+Goal State:
+[1, 2, 3]
+[8, 0, 4]
+[7, 6, 5]
+
+Solution Path:
+[2, 8, 3]
+[1, 6, 4]
+[0, 7, 5]
+
+[2, 8, 3]
+[1, 6, 4]
+[7, 0, 5]
+
+[2, 8, 3]
+[1, 0, 4]
+[7, 6, 5]
+
+[2, 0, 3]
+[1, 8, 4]
+[7, 6, 5]
+
+[0, 2, 3]
+[1, 8, 4]
+[7, 6, 5]
+
+[1, 2, 3]
+[0, 8, 4]
+[7, 6, 5]
+
+[1, 2, 3]
+[8, 0, 4]
+[7, 6, 5]
+
+Total Path Cost: 6

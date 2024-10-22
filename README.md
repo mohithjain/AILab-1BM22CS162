@@ -6,3 +6,8 @@
   <li>Implement Tic-Tac-Toe game</li>
   <li>Implement Vaccum cleaner agent</li>
 </ol>
+<h3>Week 2</h3>
+<ol>
+  <li>Solve 8 puzzle problem</li>
+  <li>Implement itterative deepening search</li>
+</ol>

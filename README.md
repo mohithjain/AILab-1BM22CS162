@@ -16,3 +16,7 @@
   <li>A* algorithm using misplaced tiles</li>
   <li>A* algorithm using manhattan distance</li>
 </ol>
+<h3>Week 4</h3>
+<ol>
+  <li>Implement hill climbing algorithm</li>
+</ol>

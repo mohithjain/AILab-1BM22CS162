@@ -1,0 +1,98 @@
+
+# calculate number of conflicts 
+def calculate_conflicts(state):
+    conflicts = 0
+    n = len(state)
+   
+    for i in range(n):
+        for j in range(i + 1, n):
+            # row,diagonal conflicts
+            if state[i] == state[j] or abs(state[i] - state[j]) == abs(i - j):
+                conflicts += 1
+    return conflicts
+
+# generate neighbors current state
+def generate_neighbors(state):
+    neighbors = []
+    n = len(state)
+   
+    for col in range(n):
+        for row in range(n):
+            if row != state[col]:
+                # Create new state 
+                new_state = list(state)
+                new_state[col] = row
+                neighbors.append(new_state)
+   
+    return neighbors
+
+#  print board with queens' positions
+def print_board(state):
+    n = len(state)
+    for row in range(n):
+        line = ""
+        for col in range(n):
+            if state[col] == row:
+                line += " Q "
+            else:
+                line += " . "
+        print(line)
+    print()
+
+# Hill climbing, 4-Queens problem
+def hill_climbing_4_queens(initial_state, max_iterations1):
+    current_state = initial_state
+    current_value = calculate_conflicts(current_state)
+   
+    print("Initial Board:")
+    print_board(current_state)
+   
+    iteration = 0  #  number of iterations
+    for iteration in range(max_iterations):
+        # Generate neighbors
+        neighbors = generate_neighbors(current_state)
+       
+        # best neighbor (steepest ascent)
+        next_state = min(neighbors, key=calculate_conflicts)
+        next_value = calculate_conflicts(next_state)
+       
+        # update neighbor
+        if next_value < current_value:
+            current_state = next_state
+            current_value = next_value
+        else:               
+            # Local optimum reached
+            break
+   
+    print("Final Board:")
+    print_board(current_state)
+   
+    return current_state, current_value, iteration + 1  # Return iteration count
+
+# user input for initial positions
+try:
+    initial_state = []
+    print("Enter the initial row positions for each queen (0 to 3) for each column (total 4 queens):")
+   
+    for col in range(4):
+        row_position = int(input(f"Enter the row position for queen in column {col} (0-3): "))
+        if 0 <= row_position <= 3:
+            initial_state.append(row_position)
+        else:
+            raise ValueError("Row position must be between 0 and 3.")
+   
+    max_iterations = int(input("Enter the maximum number of iterations: "))
+
+    # Run
+    best_state, best_value, iterations_taken = hill_climbing_4_queens(initial_state, max_iterations)
+   
+    print(f"\nBest Solution: {best_state}, Conflicts: {best_value}")
+    print(f"Solution found in {iterations_taken} iterations")
+   
+    if best_value == 0:
+        print("\nSolution found with no conflicts!")
+    else:
+        print("\nNo perfect solution found. Try increasing the number of iterations.")
+
+except ValueError as ve:
+    print(f"Error: {ve}")

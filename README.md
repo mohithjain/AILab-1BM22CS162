@@ -11,3 +11,8 @@
   <li>Solve 8 puzzle problem</li>
   <li>Implement itterative deepening search</li>
 </ol>
+<h3>Week 3</h3>
+<ol>
+  <li>A* algorithm using misplaced tiles</li>
+  <li>A* algorithm using manhattan distance</li>
+</ol>

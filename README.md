@@ -1,4 +1,4 @@
-<h3>Artificial Intelligence</h3>
+<h1>Artificial Intelligence</h1>
 <h4>Lab Observation/Report</h4>
 <break></break>
 <h3>Week 1</h3>

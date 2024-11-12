@@ -20,3 +20,11 @@
 <ol>
   <li>Implement hill climbing algorithm</li>
 </ol>
+<h3>Week 5</h3>
+<ol>
+  <li>Implement simulated annealing algorithm for 8 queens problem</li>
+</ol>
+<h3>Week 6</h3>
+<ol>
+  <li>Knowledge based propositional logic</li>
+</ol>

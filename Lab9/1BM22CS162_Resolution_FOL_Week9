@@ -1,0 +1,75 @@
+************************PROGRAM*********************
+
+class KnowledgeBase:
+    def __init__(self):
+        self.facts = set()  
+        self.rules = []    
+
+    def add_fact(self, fact):
+        self.facts.add(fact)
+
+    def add_rule(self, rule):
+        self.rules.append(rule)
+
+    def forward_chain(self):
+        new_facts = set(self.facts)
+        while True:
+            inferred = set()
+            for rule in self.rules:
+                conclusion, premises = rule
+                if all(premise in self.facts for premise in premises):
+                    if conclusion not in self.facts:
+                        inferred.add(conclusion)
+                        self.facts.add(conclusion)
+            if not inferred:
+                break
+            new_facts.update(inferred)
+        return new_facts
+
+
+def main():
+    kb = KnowledgeBase()
+
+    # Adding initial facts based on the case study
+    kb.add_fact("Likes(John, Food)")  # John likes all kinds of food
+    kb.add_fact("Food(Apple)")  # Apple is food
+    kb.add_fact("Food(Vegetables)")  # Vegetables are food
+    kb.add_fact("Eats(Anil, Peanuts)")  # Anil eats peanuts
+    kb.add_fact("Alive(Anil)")  # Anil is alive
+    kb.add_fact("Eats(Harry, Peanuts)")  # Harry eats peanuts (same as Anil)
+    kb.add_fact("Food(Peanut)")  # Explicitly stating that peanuts are food
+
+    # Adding rules (similar to those in the case study)
+    kb.add_rule(("Food(FoodItem)", ["Eats(Anil, FoodItem)", "Alive(Anil)"]))  # If Anil eats a food item and is alive, the food item is food
+    kb.add_rule(("Likes(John, Peanuts)", ["Food(Peanut)"]))  # If peanuts are food, John likes peanuts
+
+    # Forward chaining to infer new facts
+    inferred_facts = kb.forward_chain()
+
+    print("Inferred Facts:")
+    for fact in inferred_facts:
+        print(fact)
+
+    # Check for the conclusion: Does John like Peanuts?
+    if "Likes(John, Peanuts)" in inferred_facts:
+        print("\nConclusion: John likes Peanuts.")
+    else:
+        print("\nConclusion: John does not like Peanuts.")
+
+
+if __name__ == "__main__":
+    main()
+
+************************OUTPUT*********************
+
+Inferred Facts:
+Food(Vegetables)
+Eats(Anil, Peanuts)
+Food(Apple)
+Alive(Anil)
+Food(Peanut)
+Likes(John, Food)
+Likes(John, Peanuts)
+Eats(Harry, Peanuts)
+
+Conclusion: John likes Peanuts.
